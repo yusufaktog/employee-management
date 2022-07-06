@@ -3,6 +3,7 @@ package com.aktog.yusuf.employeeManagement.entity
 import org.hibernate.annotations.GenericGenerator
 import javax.persistence.*
 
+@Entity
 data class Address @JvmOverloads constructor(
     @Id
     @Column(name = "address_id")
@@ -14,9 +15,10 @@ data class Address @JvmOverloads constructor(
     val street:String,
     val buildingNumber:Int,
     val apartmentNumber:Int,
+    val zipCode:Int,
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="employee_id", referencedColumnName = "employee_id")
+    @JoinColumn(name="employee_id")
     val employee:Employee
 
 ) {
@@ -49,6 +51,6 @@ data class Address @JvmOverloads constructor(
     }
 
     override fun toString(): String {
-        return "$employee.name $employee.surname\n$street, no:$buildingNumber, aptNo:$apartmentNumber\n$city, $country"
+        return "$employee.name $employee.surname\n$street, no:$buildingNumber, aptNo:$apartmentNumber\n$city, $country\n$zipCode"
     }
 }
