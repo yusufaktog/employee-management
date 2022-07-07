@@ -5,17 +5,15 @@ import java.time.LocalDateTime
 import javax.persistence.*
 
 @Entity
-data class Department(
+data class Department @JvmOverloads constructor(
     @Id
     @Column(name = "department_id")
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     val id:String? = " ",
-
     val name:String,
     val creationDate: LocalDateTime,
-
-    val address: Address,
+    val address: Address? = null,
 
     @OneToMany(mappedBy = "department")
     val employees: Set<Employee>? = HashSet()
