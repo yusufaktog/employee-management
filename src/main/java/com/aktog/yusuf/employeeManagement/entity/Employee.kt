@@ -1,6 +1,7 @@
 package com.aktog.yusuf.employeeManagement.entity
 
 import org.hibernate.annotations.GenericGenerator
+import java.time.LocalDateTime
 import javax.persistence.*
 
 @Entity
@@ -12,9 +13,10 @@ data class Employee @JvmOverloads constructor(
     val id:String? = "",
     val name:String,
     val surname:String,
+    val salary:Int,
 
     @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
-    val addresses: Set<Address>? = HashSet(),
+    val addresses: Set<Address>,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="department_id")

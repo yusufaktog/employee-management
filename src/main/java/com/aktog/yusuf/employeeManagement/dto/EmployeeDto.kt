@@ -6,6 +6,7 @@ data class EmployeeDto @JvmOverloads constructor(
     val id:String? = "",
     val name : String,
     val surname: String,
+    val salary:Int,
 
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     val addressIds: Set<String>? = HashSet(),

@@ -1,6 +1,5 @@
 package com.aktog.yusuf.employeeManagement.service;
 
-import com.aktog.yusuf.employeeManagement.dto.AddressDto;
 import com.aktog.yusuf.employeeManagement.dto.EmployeeDto;
 import com.aktog.yusuf.employeeManagement.dto.converter.EmployeeDtoConverter;
 import com.aktog.yusuf.employeeManagement.dto.request.create.CreateEmployeeRequest;
@@ -12,18 +11,14 @@ import com.aktog.yusuf.employeeManagement.repository.EmployeeRepository;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
 public class EmployeeService {
     private final EmployeeDtoConverter employeeDtoConverter;
     private final EmployeeRepository employeeRepository;
-
     private final DepartmentService departmentService;
-
     private final AddressService addressService;
 
     public EmployeeService(EmployeeDtoConverter employeeDtoConverter,
@@ -47,31 +42,40 @@ public class EmployeeService {
 
     public String deleteEmployeeById(String employeeId) {
         findByEmployeeId(employeeId);
-
+        employeeRepository.deleteById(employeeId);
         return "Employee id : " + employeeId + " deleted";
     }
 
-    public EmployeeDto createEmployee(CreateEmployeeRequest request) {
-        Department department = departmentService.findByDepartmentId(request.getDepartmentId());
+    public EmployeeDto createEmployee(String addressId, String departmentId, CreateEmployeeRequest request) {
+        Department department = departmentService.findByDepartmentId(departmentId);
+
+        HashSet<Address> addresses = new HashSet<>();
+        addresses.add(addressService.findByAddressId(addressId));
+
         Employee employee = new Employee(
                 request.getName(),
                 request.getSurname(),
+                request.getSalary(),
+                addresses,
                 department
         );
+        addresses = null;
+
         return employeeDtoConverter.convert(employeeRepository.save(employee));
     }
 
-    public EmployeeDto UpdateEmployeeRequest(String employeeId, UpdateEmployeeRequest request) {
+    public EmployeeDto updateEmployee(String employeeId, UpdateEmployeeRequest request) {
         Employee employee = findByEmployeeId(employeeId);
-        
+
         List<String> addressIds = Optional.ofNullable(request.getAddressIds()).orElse(new ArrayList<>());
-        
+
         Employee updatedEmployee = new Employee(
                 employeeId,
                 request.getName(),
                 request.getSurname(),
-                addressIds.isEmpty() 
-                        ? employee.getAddresses() 
+                request.getSalary(),
+                addressIds.isEmpty()
+                        ? employee.getAddresses()
                         : addressIds.stream().map(addressService::findByAddressId).collect(Collectors.toSet()),
                 Optional.ofNullable(departmentService.findByDepartmentId(request.getDepartmentId()))
                         .orElse(employee.getDepartment())
@@ -79,12 +83,12 @@ public class EmployeeService {
         );
         return employeeDtoConverter.convert(employeeRepository.save(updatedEmployee));
     }
-    
-    public List<Employee> getEmployeeList(){
+
+    public List<Employee> getEmployeeList() {
         return employeeRepository.findAll();
     }
 
-    public List<EmployeeDto> getEmployeeDtoList(){
+    public List<EmployeeDto> getEmployeeDtoList() {
         return employeeDtoConverter.convert(getEmployeeList());
     }
 

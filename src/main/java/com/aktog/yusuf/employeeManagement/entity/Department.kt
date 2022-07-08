@@ -1,5 +1,6 @@
 package com.aktog.yusuf.employeeManagement.entity
 
+import org.hibernate.annotations.Cascade
 import org.hibernate.annotations.GenericGenerator
 import java.time.LocalDateTime
 import javax.persistence.*
@@ -13,7 +14,10 @@ data class Department @JvmOverloads constructor(
     val id:String? = " ",
     val name:String,
     val creationDate: LocalDateTime,
-    val address: Address? = null,
+
+    @OneToOne(cascade = [CascadeType.ALL])
+    @JoinColumn(name="address_id", referencedColumnName = "address_id")
+    val address: Address,
 
     @OneToMany(mappedBy = "department")
     val employees: Set<Employee>? = HashSet()
@@ -37,7 +41,6 @@ data class Department @JvmOverloads constructor(
         var result = id?.hashCode() ?: 0
         result = 31 * result + name.hashCode()
         result = 31 * result + creationDate.hashCode()
-        result = 31 * result + (employees?.hashCode() ?: 0)
         return result
     }
 }

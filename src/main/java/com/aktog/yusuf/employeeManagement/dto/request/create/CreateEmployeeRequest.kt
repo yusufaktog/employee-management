@@ -2,8 +2,9 @@ package com.aktog.yusuf.employeeManagement.dto.request.create
 
 import org.jetbrains.annotations.NotNull
 import javax.validation.constraints.NotBlank
+import javax.validation.constraints.Positive
 
-data class CreateEmployeeRequest @JvmOverloads constructor(
+data class CreateEmployeeRequest(
 
     @field:NotBlank
     val name:String,
@@ -11,9 +12,7 @@ data class CreateEmployeeRequest @JvmOverloads constructor(
     @field:NotBlank
     val surname:String,
 
-    @field:NotBlank
-    val addressId:String? = "",
+    @field:Positive
+    val salary:Int,
 
-    @field:NotBlank
-    val departmentId:String? = "",
 )

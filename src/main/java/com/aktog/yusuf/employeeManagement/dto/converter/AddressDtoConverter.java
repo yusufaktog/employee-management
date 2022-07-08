@@ -5,6 +5,7 @@ import com.aktog.yusuf.employeeManagement.entity.Address;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
@@ -14,10 +15,10 @@ public class AddressDtoConverter {
                 from.getId(),
                 from.getCountry(),
                 from.getCity(),
+                from.getStreet(),
                 from.getBuildingNumber(),
                 from.getApartmentNumber(),
-                from.getZipCode(),
-                from.getEmployee().getId()
+                from.getZipCode()
         );
     }
     public List<AddressDto> convert(List<Address> from){

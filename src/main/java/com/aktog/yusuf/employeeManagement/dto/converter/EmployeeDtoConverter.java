@@ -18,6 +18,7 @@ public class EmployeeDtoConverter {
                 from.getId(),
                 from.getName(),
                 from.getSurname(),
+                from.getSalary(),
                 Optional.ofNullable(from.getAddresses())
                         .orElse(new HashSet<>())
                         .stream()

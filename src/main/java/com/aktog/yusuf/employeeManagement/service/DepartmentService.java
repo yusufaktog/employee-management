@@ -4,6 +4,7 @@ import com.aktog.yusuf.employeeManagement.dto.DepartmentDto;
 import com.aktog.yusuf.employeeManagement.dto.converter.DepartmentDtoConverter;
 import com.aktog.yusuf.employeeManagement.dto.request.create.CreateDepartmentRequest;
 import com.aktog.yusuf.employeeManagement.dto.request.update.UpdateDepartmentRequest;
+import com.aktog.yusuf.employeeManagement.entity.Address;
 import com.aktog.yusuf.employeeManagement.entity.Department;
 import com.aktog.yusuf.employeeManagement.repository.DepartmentRepository;
 import org.springframework.stereotype.Service;
@@ -37,13 +38,16 @@ public class DepartmentService {
 
     public String deleteDepartmentById(String departmentId){
         findByDepartmentId(departmentId);
+        departmentRepository.deleteById(departmentId);
         return "Department id : " + departmentId + " deleted";
     }
 
-    public DepartmentDto createDepartment(CreateDepartmentRequest request){
+    public DepartmentDto createDepartment(String addressId, CreateDepartmentRequest request){
+        Address address = addressService.findByAddressId(addressId);
         Department department  = new Department(
                 request.getName(),
-                request.getCreationDate()
+                request.getCreationDate(),
+                address
         );
         return departmentDtoConverter.convert(departmentRepository.save(department));
     }

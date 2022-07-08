@@ -18,14 +18,12 @@ public class AddressService {
 
     private final AddressRepository addressRepository;
     private final AddressDtoConverter addressDtoConverter;
-    private final EmployeeService employeeService;
 
     public AddressService(AddressRepository addressRepository,
-                          AddressDtoConverter addressDtoConverter,
-                          EmployeeService employeeService) {
+                          AddressDtoConverter addressDtoConverter) {
         this.addressRepository = addressRepository;
         this.addressDtoConverter = addressDtoConverter;
-        this.employeeService = employeeService;
+
     }
 
     public Address findByAddressId(String addressId) {
@@ -38,20 +36,19 @@ public class AddressService {
 
     public String deleteAddressById(String addressId) {
         findByAddressId(addressId);
+        addressRepository.deleteById(addressId);
         return "Address id : " + addressId + " deleted";
     }
 
-    public AddressDto createAddress(String employeeId, CreateAddressRequest request) {
-        Employee employee = employeeService.findByEmployeeId(employeeId);
+    public AddressDto createAddress(CreateAddressRequest request) {
 
         Address address = new Address(
-                request.getCity(),
                 request.getCountry(),
+                request.getCity(),
                 request.getStreet(),
                 request.getBuildingNumber(),
                 request.getApartmentNumber(),
-                request.getZipCode(),
-                employee
+                request.getZipCode()
         );
 
         return addressDtoConverter.convert(addressRepository.save(address));
@@ -74,12 +71,12 @@ public class AddressService {
         return addressDtoConverter.convert(addressRepository.save(updatedAddress));
     }
 
-    public List<Address> getAuthorList(){
+    public List<Address> getAddressList(){
         return addressRepository.findAll();
     }
 
-    public List<AddressDto> getAuthorDtoList(){
-        return addressDtoConverter.convert(getAuthorList());
+    public List<AddressDto> getAddressDtoList(){
+        return addressDtoConverter.convert(getAddressList());
     }
 
 }
