@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude
 import java.time.LocalDate
 import java.time.LocalDateTime
 import javax.validation.constraints.NotBlank
+import javax.validation.constraints.NotNull
 import javax.validation.constraints.PastOrPresent
 
 data class CreateDepartmentRequest @JvmOverloads constructor(

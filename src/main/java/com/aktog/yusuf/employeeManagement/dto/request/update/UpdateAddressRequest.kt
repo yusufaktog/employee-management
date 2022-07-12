@@ -1,24 +1,23 @@
 package com.aktog.yusuf.employeeManagement.dto.request.update
 
 import javax.validation.constraints.NotBlank
+import javax.validation.constraints.NotEmpty
 import javax.validation.constraints.Positive
 
-data class UpdateAddressRequest @JvmOverloads constructor(
-    @field:NotBlank
-    val country: String? = "",
+data class UpdateAddressRequest(
 
-    @field:NotBlank
-    val city: String? = "",
+    val country: String?,
 
-    @field:NotBlank
-    val street: String? = "",
+    val city: String?,
+
+    val street: String?,
 
     @field:Positive
-    val buildingNumber: Int? = 1,
+    val buildingNumber: Int?,
 
     @field:Positive
-    val apartmentNumber: Int? = 1,
+    val apartmentNumber: Int?,
 
     @field:Positive
-    val zipCode: Int? = 1,
+    val zipCode: Int?,
 )

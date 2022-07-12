@@ -7,10 +7,10 @@ import com.aktog.yusuf.employeeManagement.dto.request.update.UpdateEmployeeReque
 import com.aktog.yusuf.employeeManagement.entity.Address;
 import com.aktog.yusuf.employeeManagement.entity.Department;
 import com.aktog.yusuf.employeeManagement.entity.Employee;
+import com.aktog.yusuf.employeeManagement.exception.EmployeeNotFoundException;
 import com.aktog.yusuf.employeeManagement.repository.EmployeeRepository;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -33,7 +33,7 @@ public class EmployeeService {
 
     public Employee findByEmployeeId(String employeeId) {
         return employeeRepository.findById(employeeId)
-                .orElseThrow(() -> new EntityNotFoundException("Employee id : " + employeeId + " not found"));
+                .orElseThrow(() -> new EmployeeNotFoundException("Employee id : " + employeeId + " not found"));
     }
 
     public EmployeeDto getByEmployeeId(String employeeId) {
@@ -48,9 +48,10 @@ public class EmployeeService {
 
     public EmployeeDto createEmployee(String addressId, String departmentId, CreateEmployeeRequest request) {
         Department department = departmentService.findByDepartmentId(departmentId);
+        Address address  = addressService.findByAddressId(addressId);
 
         HashSet<Address> addresses = new HashSet<>();
-        addresses.add(addressService.findByAddressId(addressId));
+        addresses.add(address);
 
         Employee employee = new Employee(
                 request.getName(),

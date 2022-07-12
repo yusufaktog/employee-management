@@ -6,6 +6,7 @@ import com.aktog.yusuf.employeeManagement.dto.request.create.CreateAddressReques
 import com.aktog.yusuf.employeeManagement.dto.request.update.UpdateAddressRequest;
 import com.aktog.yusuf.employeeManagement.entity.Address;
 import com.aktog.yusuf.employeeManagement.entity.Employee;
+import com.aktog.yusuf.employeeManagement.exception.AddressNotFoundException;
 import com.aktog.yusuf.employeeManagement.repository.AddressRepository;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +28,8 @@ public class AddressService {
     }
 
     public Address findByAddressId(String addressId) {
-        return addressRepository.findById(addressId).orElseThrow(() -> new EntityNotFoundException("Address id : " + addressId + " could not found"));
+        return addressRepository.findById(addressId)
+                .orElseThrow(() -> new AddressNotFoundException("Address id : " + addressId + " could not found"));
     }
 
     public AddressDto getAddressById(String addressId) {

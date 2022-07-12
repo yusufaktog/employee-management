@@ -6,6 +6,7 @@ import com.aktog.yusuf.employeeManagement.dto.request.create.CreateDepartmentReq
 import com.aktog.yusuf.employeeManagement.dto.request.update.UpdateDepartmentRequest;
 import com.aktog.yusuf.employeeManagement.entity.Address;
 import com.aktog.yusuf.employeeManagement.entity.Department;
+import com.aktog.yusuf.employeeManagement.exception.DepartmentNotFoundException;
 import com.aktog.yusuf.employeeManagement.repository.DepartmentRepository;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,9 @@ public class DepartmentService {
 
     private final AddressService addressService;
 
-    public DepartmentService(DepartmentRepository departmentRepository, DepartmentDtoConverter departmentDtoConverter, AddressService addressService) {
+    public DepartmentService(DepartmentRepository departmentRepository,
+                             DepartmentDtoConverter departmentDtoConverter,
+                             AddressService addressService) {
         this.departmentRepository = departmentRepository;
         this.departmentDtoConverter = departmentDtoConverter;
         this.addressService = addressService;
@@ -29,7 +32,7 @@ public class DepartmentService {
 
     public Department findByDepartmentId(String departmentId) {
        return departmentRepository.findById(departmentId)
-               .orElseThrow(() -> new EntityNotFoundException("Address id : " + departmentId + " could not found"));
+               .orElseThrow(() -> new DepartmentNotFoundException("Department id : " + departmentId + " could not found"));
     }
 
     public DepartmentDto getDepartmentById(String departmentId) {

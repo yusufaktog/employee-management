@@ -39,8 +39,7 @@ public class DepartmentController {
     }
 
     @GetMapping("/{departmentId}")
-    public ResponseEntity<DepartmentDto> getDepartmentById(@PathVariable String departmentId,
-                                                           @Valid @RequestBody UpdateDepartmentRequest request) {
+    public ResponseEntity<DepartmentDto> getDepartmentById(@PathVariable String departmentId) {
         return ResponseEntity.ok(departmentService.getDepartmentById(departmentId));
     }
 
