@@ -19,8 +19,7 @@ public class EmployeeDtoConverter {
                 from.getName(),
                 from.getSurname(),
                 from.getSalary(),
-                Optional.ofNullable(from.getAddresses())
-                        .orElse(new HashSet<>())
+                from.getAddresses()
                         .stream()
                         .map(Address::getId)
                         .collect(Collectors.toSet()),

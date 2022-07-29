@@ -10,7 +10,6 @@ import com.aktog.yusuf.employeeManagement.exception.DepartmentNotFoundException;
 import com.aktog.yusuf.employeeManagement.repository.DepartmentRepository;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 

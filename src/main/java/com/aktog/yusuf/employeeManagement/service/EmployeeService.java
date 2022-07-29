@@ -50,8 +50,7 @@ public class EmployeeService {
         Department department = departmentService.findByDepartmentId(departmentId);
         Address address  = addressService.findByAddressId(addressId);
 
-        HashSet<Address> addresses = new HashSet<>();
-        addresses.add(address);
+        HashSet<Address> addresses = (HashSet<Address>) Set.of(address);
 
         Employee employee = new Employee(
                 request.getName(),
@@ -60,6 +59,7 @@ public class EmployeeService {
                 addresses,
                 department
         );
+
         addresses = null;
 
         return employeeDtoConverter.convert(employeeRepository.save(employee));

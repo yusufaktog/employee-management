@@ -5,12 +5,10 @@ import com.aktog.yusuf.employeeManagement.dto.converter.AddressDtoConverter;
 import com.aktog.yusuf.employeeManagement.dto.request.create.CreateAddressRequest;
 import com.aktog.yusuf.employeeManagement.dto.request.update.UpdateAddressRequest;
 import com.aktog.yusuf.employeeManagement.entity.Address;
-import com.aktog.yusuf.employeeManagement.entity.Employee;
 import com.aktog.yusuf.employeeManagement.exception.AddressNotFoundException;
 import com.aktog.yusuf.employeeManagement.repository.AddressRepository;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 

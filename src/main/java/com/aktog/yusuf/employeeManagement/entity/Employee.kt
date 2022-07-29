@@ -1,7 +1,6 @@
 package com.aktog.yusuf.employeeManagement.entity
 
 import org.hibernate.annotations.GenericGenerator
-import java.time.LocalDateTime
 import javax.persistence.*
 
 @Entity

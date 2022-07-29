@@ -1,6 +1,5 @@
 package com.aktog.yusuf.employeeManagement.dto.request.create
 
-import org.jetbrains.annotations.NotNull
 import javax.validation.constraints.NotBlank
 import javax.validation.constraints.Positive
 

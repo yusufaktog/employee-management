@@ -1,7 +1,5 @@
 package com.aktog.yusuf.employeeManagement.dto.request.update
 
-import javax.validation.constraints.NotBlank
-import javax.validation.constraints.NotEmpty
 import javax.validation.constraints.Positive
 
 data class UpdateAddressRequest(
