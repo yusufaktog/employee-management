@@ -60,8 +60,6 @@ public class EmployeeService {
                 department
         );
 
-        addresses = null;
-
         return employeeDtoConverter.convert(employeeRepository.save(employee));
     }
 
