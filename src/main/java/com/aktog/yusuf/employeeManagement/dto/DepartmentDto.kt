@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude
 import java.time.LocalDateTime
 
 data class DepartmentDto @JvmOverloads constructor(
+
     val id:String? = "",
     val name:String,
     val creationDate:LocalDateTime,

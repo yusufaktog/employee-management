@@ -17,14 +17,16 @@ data class Address @JvmOverloads constructor(
     val apartmentNumber:Int,
     val zipCode:Int,
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="employee_id")
-    val employee:Employee? = null
+
+    @ManyToMany(mappedBy = "addresses", fetch = FetchType.LAZY)
+    val employees:Set<Employee>? = HashSet()
 
 ) {
 
+
     override fun toString(): String {
-        return "$employee.name $employee.surname\n$street, no:$buildingNumber, aptNo:$apartmentNumber\n$city, $country\n$zipCode"
+        return "Address(id=$id, country='$country', city='$city', street='$street'," +
+                " buildingNumber=$buildingNumber, apartmentNumber=$apartmentNumber, zipCode=$zipCode)"
     }
 
     override fun equals(other: Any?): Boolean {
@@ -34,14 +36,24 @@ data class Address @JvmOverloads constructor(
         other as Address
 
         if (id != other.id) return false
-        if (employee != other.employee) return false
+        if (country != other.country) return false
+        if (city != other.city) return false
+        if (street != other.street) return false
+        if (buildingNumber != other.buildingNumber) return false
+        if (apartmentNumber != other.apartmentNumber) return false
+        if (zipCode != other.zipCode) return false
 
         return true
     }
 
     override fun hashCode(): Int {
         var result = id?.hashCode() ?: 0
-        result = 31 * result + (employee?.hashCode() ?: 0)
+        result = 31 * result + country.hashCode()
+        result = 31 * result + city.hashCode()
+        result = 31 * result + street.hashCode()
+        result = 31 * result + buildingNumber
+        result = 31 * result + apartmentNumber
+        result = 31 * result + zipCode
         return result
     }
 }

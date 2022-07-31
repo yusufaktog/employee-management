@@ -1,6 +1,7 @@
 package com.aktog.yusuf.employeeManagement.dto.request.update
 
 import com.fasterxml.jackson.annotation.JsonInclude
+import javax.validation.constraints.Email
 import javax.validation.constraints.NotBlank
 import javax.validation.constraints.Positive
 
@@ -11,6 +12,9 @@ data class UpdateEmployeeRequest @JvmOverloads constructor(
 
     @field:NotBlank
     val surname: String,
+
+    @field:Email
+    val email:String,
 
     @field:Positive
     val salary:Int,

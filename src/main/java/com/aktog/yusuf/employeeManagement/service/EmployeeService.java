@@ -50,13 +50,13 @@ public class EmployeeService {
         Department department = departmentService.findByDepartmentId(departmentId);
         Address address  = addressService.findByAddressId(addressId);
 
-        HashSet<Address> addresses = (HashSet<Address>) Set.of(address);
-
         Employee employee = new Employee(
                 request.getName(),
                 request.getSurname(),
+                request.getEmail(),
+                request.getBirthDate(),
                 request.getSalary(),
-                addresses,
+                Set.of(address),
                 department
         );
 
@@ -72,6 +72,8 @@ public class EmployeeService {
                 employeeId,
                 request.getName(),
                 request.getSurname(),
+                request.getEmail(),
+                employee.getBirthDate(),
                 request.getSalary(),
                 addressIds.isEmpty()
                         ? employee.getAddresses()

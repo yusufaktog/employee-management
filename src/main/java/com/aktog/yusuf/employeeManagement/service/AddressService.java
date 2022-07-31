@@ -66,7 +66,7 @@ public class AddressService {
                 Optional.ofNullable(request.getBuildingNumber()).orElse(address.getBuildingNumber()),
                 Optional.ofNullable(request.getApartmentNumber()).orElse(address.getApartmentNumber()),
                 Optional.ofNullable(request.getZipCode()).orElse(address.getZipCode()),
-                address.getEmployee()
+                address.getEmployees()
         );
         return addressDtoConverter.convert(addressRepository.save(updatedAddress));
     }

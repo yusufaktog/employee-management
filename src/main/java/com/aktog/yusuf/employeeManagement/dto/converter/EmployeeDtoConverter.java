@@ -14,10 +14,13 @@ import java.util.stream.Collectors;
 public class EmployeeDtoConverter {
 
     public EmployeeDto convert(Employee from) {
+
         return new EmployeeDto(
                 from.getId(),
                 from.getName(),
                 from.getSurname(),
+                from.getEmail(),
+                from.getBirthDate(),
                 from.getSalary(),
                 from.getAddresses()
                         .stream()

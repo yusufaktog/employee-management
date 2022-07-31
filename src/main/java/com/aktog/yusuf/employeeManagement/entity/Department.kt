@@ -15,7 +15,7 @@ data class Department @JvmOverloads constructor(
     val creationDate: LocalDateTime,
 
     @OneToOne(cascade = [CascadeType.ALL])
-    @JoinColumn(name="address_id", referencedColumnName = "address_id")
+    @JoinColumn(name="address_id")
     val address: Address,
 
     @OneToMany(mappedBy = "department")
@@ -41,5 +41,9 @@ data class Department @JvmOverloads constructor(
         result = 31 * result + name.hashCode()
         result = 31 * result + creationDate.hashCode()
         return result
+    }
+
+    override fun toString(): String {
+        return "Department(id=$id, name='$name', creationDate=$creationDate)"
     }
 }
