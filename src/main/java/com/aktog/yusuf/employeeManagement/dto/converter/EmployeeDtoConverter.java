@@ -22,6 +22,7 @@ public class EmployeeDtoConverter {
                 from.getEmail(),
                 from.getBirthDate(),
                 from.getSalary(),
+                from.getDepartment().getName(),
                 from.getAddresses()
                         .stream()
                         .map(Address::getId)

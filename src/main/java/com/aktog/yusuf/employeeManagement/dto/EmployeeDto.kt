@@ -13,6 +13,8 @@ data class EmployeeDto @JvmOverloads constructor(
     val birthDate: Date,
     val salary:Int,
 
+    val departmentName:String? = "",
+
     val addressIds: Set<String>? = HashSet(),
 
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
