@@ -12,8 +12,7 @@ data class EmployeeDto @JvmOverloads constructor(
     val email:String,
     val birthDate: Date,
     val salary:Int,
-
-    val departmentName:String? = "",
+    val departmentName:String,
 
     val addressIds: Set<String>? = HashSet(),
 

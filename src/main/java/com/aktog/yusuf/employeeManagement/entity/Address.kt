@@ -17,7 +17,6 @@ data class Address @JvmOverloads constructor(
     val apartmentNumber:Int,
     val zipCode:Int,
 
-
     @ManyToMany(mappedBy = "addresses", fetch = FetchType.LAZY)
     val employees:Set<Employee>? = HashSet()
 
