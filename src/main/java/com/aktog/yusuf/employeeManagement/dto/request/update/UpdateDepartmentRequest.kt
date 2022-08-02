@@ -9,9 +9,6 @@ data class UpdateDepartmentRequest @JvmOverloads constructor(
     @field:NotBlank
     val name: String,
 
-    @field:NotEmpty
-    val employeeIds: Set<String>? = HashSet(),
-
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     val addressId: String?  = ""
 )
